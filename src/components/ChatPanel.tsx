@@ -86,10 +86,11 @@ export default function ChatPanel({ onParamsChange }: ChatPanelProps) {
   const handleSend = async () => {
     if (!input.trim()) return;
 
+    const userInput = input;
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content: input,
+      content: userInput,
     };
 
     setMessages((prev) => [...prev, userMessage]);
@@ -97,12 +98,12 @@ export default function ChatPanel({ onParamsChange }: ChatPanelProps) {
     setIsLoading(true);
 
     // Parse command and update params
-    const params = parseCommand(input);
+    const params = parseCommand(userInput);
     if (Object.keys(params).length > 0) {
       onParamsChange(params);
     }
 
-    // Simulate AI response
+    // Simulate AI response (no backend needed for MVP)
     setTimeout(() => {
       const responses = [
         '✨ Updating your vision...',
